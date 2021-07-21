@@ -1,0 +1,396 @@
+
+################################################
+    GIT CHEAT SHEET
+
+    Good playlist:
+    https://youtu.be/FyAAIHHClqI?t=899
+################################################
+
+################################################
+Basics
+################################################
+# clear bash console
+clear
+
+# set username globally
+got config --global user.name = my_name
+
+# query username and email along with other config stuff
+git config --list
+
+# initilize local repo
+git init
+
+# See commits that have affected a file
+git log -- file_name
+
+# List all tracked files
+git ls-tree --full-tree -r --name-only HEAD
+
+# In commit window, how to write commit text
+https://stackoverflow.com/questions/19085807/please-enter-a-commit-message-to-explain-why-this-merge-is-necessary-especially
+
+# Git text window
+i : start typin
+esc : exit typing modeto command mode
+:wq :commit message and exit
+:q :  exit without commiting
+
+##############
+Working tree change
+##############
+# Difference between working tree and staging area. Staging area is by default unmodified working tree!
+git diff
+
+##############
+Undo working tree change
+##############
+
+# check which fiels in working tree have changed
+git checkout
+
+# Ignore changes and return to working tree (use -- for files to avoid ambiguity)
+git checkout stuff       # checkout the branch stuff
+git checkout -- stuff    # checkout the file stuff
+git checkout .           # discard changes for whole current directory
+
+##############
+Stash working tree changes
+##############
+https://youtu.be/FyAAIHHClqI?t=1327
+https://stackoverflow.com/questions/20537223/when-should-i-use-git-stash
+
+##############
+Detached HEAD, a.k.a. see earlier commits
+##############
+
+# See hashes
+git log
+
+# Checkout certain hash
+git checkout hash_key
+
+# If one wants, one can create a branch at the commit
+git branch new_branch_name
+git checkout new_branch_name
+
+# Return HEAD to master branch
+git checkout master
+
+##############
+Staging
+##############
+
+# add all
+git add -A
+
+# Stage only modified and deleted files, not untracked ones
+git add -u
+
+# Difference between staging area and latest commit
+git diff --staged file_name
+
+##############
+Unstaging
+##############
+# HEAD refers to most recent commit
+git reset HEAD file_name
+
+##############
+Committing
+##############
+# Commit staged changes
+git commit -m "comment here"
+
+# Stage and commit in same command
+git commit -a -m "comment here" commits all changed, unstaged files
+
+# Change most recent commit message
+git commit --amend
+
+##############
+Untrack file
+##############
+
+# Remove tracking on all machines
+git rm -r --cached <file>
+
+# Ignore changes temporarily
+git update-index --assume-unchanged path/to/file # untrack
+git update-index --no-assume-unchanged path/to/file # start tracking again
+
+
+##############
+Restore file from earlier commit
+##############
+git checkout hash_key -- file_name
+
+##############
+Aliases
+Creat an alias for a long command
+##############
+alias alias_name = "your_command_here"
+
+##############
+Reverting to earlier commit
+##############
+https://stackoverflow.com/questions/4114095/how-to-revert-a-git-repository-to-a-previous-commit
+
+################################################
+Branching
+
+all branches have same working tree!
+https://stackoverflow.com/questions/8111991/git-is-automatically-merging-changes-from-a-different-branch-to-master
+################################################
+
+# easy way to check on which branch we are
+git status
+
+# Branch graph
+git log --all --decorate --oneline --graph
+alias graph="git log --all --decorate --oneline --graph"
+
+# List all branches
+git branch
+
+# Create branch
+git branch branch_name
+
+# checkout branch
+git checkout branch_name
+
+# delete branch locally
+#   warning "branch is not fully merged" means that commits in 
+#   branch are not reachable from any of: its upstream branch, or HEAD 
+git branch -d branch_name
+
+# delete branch from remote
+# https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-locally-and-remotely
+git push -d <remote_name> <branch_name>
+
+# branch deleted on remote, but still visible locally;
+# remove from local tree
+git branch -d -r origin/coolbranch
+
+# Create new branch with no history
+# Convenient for hidig legazy from public repo
+git checout --orphan branch_name
+git commit "init branch with no history"
+
+# Rename branch locally and remotely
+# https://multiplestates.wordpress.com/2015/02/05/rename-a-local-and-remote-branch-in-git/
+git activate <old_name>
+git branch -m <new_name>
+git push origin :<old_name> <new_name>
+git push origin -u <new_name>
+
+##############
+Makes clones of another repository
+##############
+
+# Clone whole repo to another folder
+# => Go to where clone should be set up
+git clone path_to_repo/.git
+
+# Clone specific branch from repo to another folder
+# => Go to where clone should be set up
+git clone --single-branch --branch branch_name path_to_repo/.git
+# If we also want to remove link to origin
+git remote remove origin
+
+# Make clone of only latest commit in given local repository branch 
+git clone --depth 1 -b <mybranch> file://<abs_path_to_repo>
+
+##############
+Check what has already been merged
+##############
+
+# lists branches merged into master
+git branch --merged master
+
+# list branches merged into HEAD (i.e. tip of current branch)
+git branch --merged
+
+# list branches that have not been merged
+git branch --no-merged
+
+##############
+Fast-forward merge
+For direct merge to catch one branch with another
+Example:              Ff-merge ===>
+--O--master--branch1                --O--base--master
+                                               branch1
+##############
+git checkout master
+git merge branch1
+
+##############
+Three-way merge
+Example:
+        branch_2                           branch2
+         /				  /       \
+        /         3-way-merge ===>       /         \
+       /			        /           \
+--O--base--master                --O--base--branch1--master
+           branch1                         
+
+Here branch2 cannot be merged directly eg. with master, otherwise
+we lose changes from branch1. Three-way merge looks at base, 
+branch1 and branch2
+##############
+git checkout master
+git merge branch2
+
+##############
+Merge conflicts
+##############
+
+# abort merging
+git merge --abort
+
+# Opening mergetool to resolve a merge conflict
+    # If not run previously, configure merge tool
+    git config merge.tool vimdiff
+    git config merge.conflictstyle diff3
+    git config mergetool.prompt false
+    
+    # Run mergetool and resolve conflict
+    # More help here:
+    # https://stackoverflow.com/questions/161813/how-to-resolve-merge-conflicts-in-git
+    git mergetool
+    
+# Once conflicts are fixed and staged, bu you are still merging
+git commit
+
+##############
+Rebasing
+##############
+
+# Somewhat similar to merge
+# see e.g. http://lea.verou.me/2011/10/easily-keep-gh-pages-in-sync-with-master/
+
+# One key usage cases: master has some general enhancements (e.g. bug fixes)
+# and one wants to include these also in separate project branch "project"
+#https://stackoverflow.com/questions/5340724/get-changes-from-master-into-branch-in-git?answertab=votes#tab-top
+git checkout project
+git rebase master
+# Notice if you afterwards want to push project into remote, you might need to
+# force it:
+git push --force origin project
+
+################################################
+Tags
+################################################
+
+# List all tags
+git tag -l
+
+# Chekout certain tag
+git checkout tags/<tag_name> -b <branch_name>
+
+# Create tag to HEAD
+git tag -a v0.1.0 -m "my version 0.1.0"
+
+# Git does not push tags by default to remote.
+# Ensure this by including --tags
+git push origin mybranch --tags
+
+################################################
+Stashing
+################################################
+
+# Create stash for surrent state
+git stash
+# Do stuff elsewhere, once ready to apply stah on current HEAD
+git stash apply
+# To get rid of stash, first list stashes
+git stash list
+# Remove stash with id (e.g. stash@{0})
+git stash drop <stash_id>
+
+################################################
+Remotes
+################################################
+
+# Display remotes
+git remote
+
+# See full locations
+git remote -v
+
+# Check at what state remote origin is
+git fetch origin
+
+# ..and merge local with origin
+git merge origin/master
+
+# Combined git fetch and git merge as convenience method
+git pull
+
+# push changes from local to remote
+git push origin master
+
+# Add second upstream in addition to origin
+https://youtu.be/Gg4bLk8cGNo?t=1215
+
+##############
+Cloning repo
+##############
+git clone http://git.abc.net/git/abc.git
+
+# Clone only certain branch/tag, with no non-current history
+git clone --branch <branch of tag name> --depth 1 http://git.abc.net/git/abc.git
+
+################################################
+.gitignore
+Put files here you want git to ignore
+################################################
+vi .gitignore
+
+file_name : ignore file file_name
+*.png : ignore all png files
+folder_name/ : exclude everything in folder folder_name
+
+# Ignore folder except one file
+folder/*
+!folder/my_file
+
+# If gitignored folder is already commited, it needs to be
+# removed from cahce
+git rm -r --cached folder_name
+
+################################################
+Typical list for .gitignore
+################################################
+.ipynb_checkpoints
+__pycache__
+*.Rhistory
+.vscode/
+
+################################################
+Detach (move) subdirectory into separate Git repository
+################################################
+The Easy Way, see here:
+https://stackoverflow.com/questions/359424/detach-move-subdirectory-into-separate-git-repository/17864475#17864475
+
+
+
+
+################################################
+Github
+################################################
+
+##############
+Initialize new Gitub repo
+##############
+https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/
+
+# Verifies the new remote URL
+git remote -v
+
+##############
+gh-pages
+##############
+http://oli.jp/2011/github-pages-workflow/
+http://lea.verou.me/2011/10/easily-keep-gh-pages-in-sync-with-master/
+
