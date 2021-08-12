@@ -27,4 +27,8 @@ Tested on a Windows 10 machine. The plugin for VSCode is [LaTeX-Workshop](https:
 
 ## Usage
 
- - Quite straightforward!
+ - Basic usage quite straightforward. See the Tex pane provided by the plugin.
+ - Setting up bibliography:
+   - We use [biblatex](https://www.overleaf.com/learn/latex/Bibliography_management_with_biblatex) with *biber* backend.
+   - Before `\begin{document}`, put `\usepackage[style=authoryear, backend=biber]{biblatex}` and `\bibliography{<name of .bib file w/out extension>}`. Then at the end where the reference section should show up `\printbibliography`.
+   - See this [cheat sheet](http://tug.ctan.org/info/biblatex-cheatsheet/biblatex-cheatsheet.pdf) for citation commands etc.
