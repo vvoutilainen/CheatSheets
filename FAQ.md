@@ -62,9 +62,22 @@
 
 - Interpretation of potential outcomes as error terms of a SCM: Pearl 2009, p.343.
 
+- Advantage of POs
+  - "*While DAGs illuminate the entire causal structure, the potential outcomes framework clarifies the assumptions about treatment assignment mechanism*" (Imai & Kim 2019)
+  - "*[P]otential outcome model of causality [...] is valuable precisely because it helps researchers to stipulate assumptions, evaluate alternative data analysis techniques, and think carefully about the process of causal exposure. [...] [Language of potential outcomes] permits the analyst to conceptualize observational studies as if they were experimental designs controlled by someone other than the researcher.*" (Morgan & Winship 2015, p. 7)
+
 ### Causality, time series
 
 - [What is the difference between identification, calibration and estimation?](https://economics.stackexchange.com/a/36639)
+
+### Causality, cross-section and panel
+
+ - What is *analysis of covariance*?
+   - In panel context, it is the fixed effects within estimator (Angrist & Pischke 2008, p.167).
+   - "*ANCOVA evaluates whether the means of a dependent variable (DV) are equal across levels of a categorical independent variable (IV) often called a treatment, while statistically controlling for the effects of other continuous variables that are not of primary interest, known as covariates (CV) or nuisance variables. [...]  Intuitively, ANCOVA can be thought of as 'adjusting' the DV by the group means of the CV(s)*" ([Wikipedia](https://en.wikipedia.org/wiki/Analysis_of_covariance))
+
+ - Connection between DiD and TWFE estimators
+   - When there are two time periods and the treatment is administered to some units only in the second period, DiD and TWFE estimators are numerically equivalent (see e.g. [here page 19](https://imai.fas.harvard.edu/research/files/tscs.pdf), but find a better source). Does not hold e.g. when there are more periods or when each unit may receive the treatment multiple times.
 
 ## Cross-section
 
