@@ -21,6 +21,13 @@
   - In observational studies with no explicit causal interpretation: make allow for comparisons between units, eg. "when comparing two children whose mothers have the same level of education, the child whose mother is X IQ points higher is predicted to have a test score that is 6x higher, on average" (Gelman, Hill, Vehtari 2021 p. 134)
   - In predection tasks, to increase (in-sample) goodness of fit ([non-decreasing property of R2](https://stats.stackexchange.com/a/401466/162538))
 
+- What is the difference between an *error term* and *residual term*?
+  - "Error" or "disturbance" in a structural causal model is an unobserved, exogenous (influencing outcome but not influenced by other variables) variable that is shaped by physical reality. In statistical sense, "statistical error" or "statistical disturbance" is the amount by which an observation differs from its expected value.
+  - "Residual" is an artifact of the analysis, which, by definition, is uncorrelated with the regressor. It is the difference between observed value and the estimated value. In statistical sense, it is the observable estimate of the unobservable statistical error.
+  - See [Wikipedia](https://en.wikipedia.org/wiki/Errors_and_residuals) and page 8 of [Pearl (2021)](https://ftp.cs.ucla.edu/pub/stat_ser/r370.pdf)
+  
+  the deviation of the observed value from the (unobservable) true value of a quantity 
+
 ## Estimation
 
 - What is the difference between MLE and least-squares? [Here](https://stats.stackexchange.com/questions/143705/maximum-likelihood-method-vs-least-squares-method) and [here](https://stats.stackexchange.com/questions/12562/equivalence-between-least-squares-and-mle-in-gaussian-model).
