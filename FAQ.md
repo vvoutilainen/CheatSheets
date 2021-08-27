@@ -59,6 +59,8 @@
   - [Regressions extrapolates](https://stats.stackexchange.com/a/8655/162538)
   - [Using both is "doubly robust"](https://stats.stackexchange.com/a/248967/162538), see [this paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2943670/) section 5.
 
+- [Gelman on identification strategies vs. estimation](https://statmodeling.stat.columbia.edu/2009/07/05/disputes_about/): "*here’s too much focus on technique and not enough thought put into what the estimates are really telling you*"
+
 ### Causality, PO vs SCM
 
 - [Pearl's comments on Imben's paper *Potential Outcome and Directed Acyclic Graph Approaches to Causality*](http://causality.cs.ucla.edu/blog/index.php/2020/01/29/on-imbens-comparison-of-two-approaches-to-empirical-economics/)
@@ -72,6 +74,8 @@
 - Advantage of POs
   - "*While DAGs illuminate the entire causal structure, the potential outcomes framework clarifies the assumptions about treatment assignment mechanism*" (Imai & Kim 2019)
   - "*[P]otential outcome model of causality [...] is valuable precisely because it helps researchers to stipulate assumptions, evaluate alternative data analysis techniques, and think carefully about the process of causal exposure. [...] [Language of potential outcomes] permits the analyst to conceptualize observational studies as if they were experimental designs controlled by someone other than the researcher.*" (Morgan & Winship 2015, p. 7)
+
+- [Gelman on the difference between SCM and PO](https://statmodeling.stat.columbia.edu/2009/07/05/disputes_about/)
 
 ### Causality, time series
 
