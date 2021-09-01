@@ -107,6 +107,10 @@
 - When to use clustered stadard errors in panel models?
   - In addition to cross-section case, one might need to think about serial correlation. See Angrist & Pischke (2008) section 8.2.2.
 
+- What is a triple-difference (DiDiDi) design?
+  - See section 18.3.3 of Huntington-Klein (2021) and [this pdf](https://www.nber.org/lecture/summer-institute-2007-methods-lecture-difference-differences-estimation).
+  - Probably the same as difference-in-difference with heterogenous treatment effects, see [this](https://stats.stackexchange.com/questions/183302/difference-in-difference-with-interaction).
+
 ## Time series
 
 ### Time series, general
@@ -124,5 +128,6 @@
 ## References
  - Angrist & Pischke (2008): Mostly harmless econometrics
  - Gelman, Hill, Vehtari (2021): Regressions and other stories
+ - [Huntington-Klein (2021)](https://theeffectbook.net/index.html): The effect
  - Imbens & Rubin (2015): Causal inference for statistics, social, and biomedical sciences
  - Pearl (2009): Causality
