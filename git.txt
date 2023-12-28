@@ -148,7 +148,7 @@ git status
 
 # Branch graph
 git log --all --decorate --oneline --graph
-alias graph="git log --all --decorate --oneline --graph"
+alias graph="git log --all --decorate --oneline --graph --pretty=format:'%C(auto)%cd %h %d %s' --date=short"
 
 # List all branches
 git branch
