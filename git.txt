@@ -147,8 +147,9 @@ https://stackoverflow.com/questions/8111991/git-is-automatically-merging-changes
 git status
 
 # Branch graph
-git log --all --decorate --oneline --graph
+# Some further options: https://stackoverflow.com/a/9074343
 alias graph="git log --all --decorate --oneline --graph --pretty=format:'%C(auto)%cd %h %d %s' --date=short"
+alias graph="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%cd%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --date=short"
 
 # List all branches
 git branch
